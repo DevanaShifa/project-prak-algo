@@ -10,7 +10,7 @@ struct Barang{
 
 Barang brg[100];
 int n = 0;
-
+// apa
 void inputDataBarang(){
     int n;
     cout << endl << "===== INPUT DATA BARANG ====="<< endl;
