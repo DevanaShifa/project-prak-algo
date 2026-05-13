@@ -10,11 +10,22 @@ struct Barang{
 
 Barang brg[100];
 int n = 0;
-// apa
-// apaa
+
+bool konfirmasi(string pesan){
+    char jawab;
+    cout << pesan << " (y/t): ";
+    cin >> jawab;
+    cout << endl;
+    return (jawab == 'y' || jawab == 'Y');
+}
+
+bool kembali(){
+    return konfirmasi("Kembali ke Menu Utama?");
+}
+
 void inputDataBarang(){
     int n;
-    cout << endl << "===== INPUT DATA BARANG ====="<< endl;
+    cout << "\n===== INPUT DATA BARANG =====\n";
     cout << "Jumlah Barang : ";
     cin >> n; cout << endl;
     cin.ignore();
@@ -61,12 +72,15 @@ void tampilBarang(){
 
 int main(){
     int menu;
+    bool lanjut = true;
+
+    while(lanjut){
     cout << "===== MENU UTAMA =====" << endl;
     cout << "1. INPUT DATA BARANG" << endl
-         << "2. SEARCH BARANG" << endl
-         << "3. SORTING BARANG" << endl
-         << "4. SAVE FILE BARANG" << endl
-         << "5. TAMPIL BARANG" << endl
+         << "2. TAMPIL BARANG" << endl
+         << "3. SEARCH BARANG" << endl
+         << "4. SORTING BARANG" << endl
+         << "5. SAVE FILE BARANG" << endl
          << "=============================" << endl;
     cout << "Pilih Menu : ";
     cin >> menu;
@@ -74,19 +88,23 @@ int main(){
     switch (menu){
     case 1:
         inputDataBarang();
+        lanjut = kembali();
         break;
     case 2:
+        tampilBarang();
+        lanjut = kembali();
         break;
     case 3:
         break;
     case 4:
         break;
     case 5:
-        tampilBarang();
+    
         break;
     
     default:
         break;
     }
- 
+}
+cout << "Program selesai." << endl;
 }
