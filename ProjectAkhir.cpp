@@ -70,9 +70,10 @@ void tampilBarang(){
 void menuSearch(){
     int pilih;
 
-    cout << "\nMENU SERACHING\n";
+    cout << "\n====MENU SERACHING====\n";
     cout << "1. SEQUENTIAL SEARCH\n';
     cout << "2. BINARY SEARCH\n";
+    cout << "========================\n";
     cout << "pilihan: ";
     cin >> pilih;
 
