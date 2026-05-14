@@ -6,6 +6,7 @@ struct Barang{
     string nama;
     string loc;
     string tanggal;
+    int id;
 };
 
 Barang brg[100];
@@ -68,7 +69,73 @@ void tampilBarang(){
     cout << endl;
 }
 
+void sequentialSearch(int arr[], int n, int key){
+    bool found = false;
 
+    for(int i = 0; i<n; i++){
+        if(arr[i]==key){
+            cout << "Data ditemukan!";
+            found = true;
+            break;
+        }
+    }
+    if(!found){
+        cout << "Data Tidak ditemukan!"<< endl;
+    }
+}
+
+void shellsort(int arr[], int n){
+    for(int gap = n/2; gap>0; gap /=2){
+        for(int i = gap; i<n; i++){
+            int temp = arr[i];
+            int j;
+            
+            for(int j = i; j >=gap && arr[j-gap] > temp; j-= gap){
+                arr[j]=arr[j-gap];
+            }
+            arr[j] = temp;
+        }
+    }
+}
+
+void insertionSort(int arr[], int n){
+    int temp, i, j;
+    for(i=1; i<n; i++){
+        temp = arr[i];
+        j=i-1;
+        while ((j >= 0) && (arr[j]> temp)){
+            arr[j+1]=arr[j];
+            j--;
+        }
+        arr[j+1] = temp;
+    }
+}
+
+void listsorting(){
+    int menu;
+    cout << "===== MENU SORTING =====";
+    cout << "1. Bubble Sort\n"
+         << "2. Insertion Sort\n"
+         << "3. Selection Sort\n"
+         << "4. Shell Sort\n"
+         << "5. Quick Sort\n"
+         << "6. Merge Sort\n"
+         << "--------------------\n"
+         << "Pilih : "; cin >> menu;
+    cout << endl;
+
+    switch(menu){
+        case 1:
+        break;
+        case 2:
+        break;
+        case 3:
+        break;
+        case 4:
+        
+        case 5:
+    }
+}
 
 int main(){
     int menu;
