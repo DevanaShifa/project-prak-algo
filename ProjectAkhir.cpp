@@ -10,7 +10,7 @@ struct Barang{
 };
 
 Barang brg[100];
-int n = 0;
+int jumlahBarang = 0;
 
 bool konfirmasi(string pesan){
     char jawab;
@@ -25,13 +25,12 @@ bool kembali(){
 }
 
 void inputDataBarang(){
-    int n;
     cout << "\n===== INPUT DATA BARANG =====\n";
     cout << "Jumlah Barang : ";
-    cin >> n; cout << endl;
+    cin >> jumlahBarang; cout << endl;
     cin.ignore();
 
-    for(int i=0; i<n; i++){
+    for(int i=0; i<jumlahBarang; i++){
         cout << "\nData ke-" << i + 1 << endl;
         cout << "Nama Barang : "; getline(cin, brg[i].nama);
         cout << "Lokasi Barang ditemukan : "<< endl;
@@ -46,7 +45,7 @@ void inputDataBarang(){
 }
 
 void tampilBarang(){
-    if (n == 0) {
+    if (jumlahBarang == 0) {
         cout << "Data kosong!" << endl << endl;
         return;
     }
@@ -61,7 +60,7 @@ void tampilBarang(){
 
     cout << "------------------------------\n";
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < jumlahBarang; i++) {
         cout << left << setw(15) << brg[i].nama
              << setw(15) << brg[i].loc
              << setw(10) << brg[i].tanggal << endl;
