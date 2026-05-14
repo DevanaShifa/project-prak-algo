@@ -67,6 +67,62 @@ void tampilBarang(){
     cout << endl;
 }
 
+void menuSearch(){
+    int pilih;
+
+    cout << "\nMENU SERACHING\n";
+    cout << "1. SEQUENTIAL SEARCH\n';
+    cout << "2. BINARY SEARCH\n";
+    cout << "pilihan: ";
+    cin >> pilih;
+
+    switch(pilih){
+    case 1:
+        //sequen
+        break;
+    case 2:
+        binarySearch();
+        break;
+
+        default:
+            cout << "Pilihan Tidak Ada!\n";
+    }
+}
+
+//Searching
+void binarysearch(){
+    //data harus sudah terurut
+    bubbleSort();
+
+    string cari;
+    cout << "\nMasukan nama barang yang dicari: ";
+    cin.ignore();
+    getline(cin.cari);
+
+    int awal = 0;
+    int akhir = jumlahBarang - 1;
+    bool ditemukan = false;
+
+    while(awal <= akhir){
+        int tengah = (awal + akhir) / 2;
+
+        if(brg[tengah].nama == cari){
+            cout << "\nBarang ditemukan!\n";
+            cout << "Nama Barang       : " << brg[tengah].nama << endl;
+            cout << "Lokasi            : " << brg[tengah].loc << endl;
+            cout << "Tanggal ditemukan : " << brg[tengah].tanggal << endl;
+        
+            ditemukan = true;
+            break;
+        }
+        else if(brg[tengah].nama < cari){
+            awal = tengah + 1;
+        }
+        else{
+            akhir = tengah - 1;
+        }
+    }
+}
 // Sorting
 void bubbleSort() {
     int i, j;
@@ -74,8 +130,8 @@ void bubbleSort() {
     // sorting process
     for (i = 0; i < jumlahBarang - 1; i++) {
         for (j = 0; j < jumlahBarang - 1 - i; j++) {
-            if (listAnggotaSorted[j].noAnggota > listAnggotaSorted[j+1].noAnggota) {
-                swap(listAnggotaSorted[j], listAnggotaSorted[j+1]);
+            if (brg[j].nama > brg[j+1].nama) {
+                swap(brg[j], brg[j+1]);
             }
         }
     }
@@ -84,7 +140,8 @@ void bubbleSort() {
 // Bubble sort nya dua, yang atas buat sorting sebelum binary search
 void bubbleSortDisplay() {
     bubbleSort();
-    tampilData(listAnggotaSorted);
+    cout << "\nData setelah Bubble Sort:\n";
+    tampilData();
 }
 
 void selectionSort() {
@@ -95,15 +152,15 @@ void selectionSort() {
         int minIndex = i;
         for (j = i+1; j < jumlahBarang; j++)
         {
-            if (listAnggotaSorted[j].noAnggota < listAnggotaSorted[minIndex].noAnggota) {
+            if (brg[j].nama < brg[minIndex].nama) {
                 minIndex = j;
             }
         }
         
-        swap(listAnggotaSorted[i], listAnggotaSorted[minIndex]);
+        swap(brg[i], brg[minIndex]);
     }
-
-    tampilData(listAnggotaSorted);
+    cout << "\nData setelah Selection Sort:\n";
+    tampilBarang();
 }
 
 void insertionShort(){
