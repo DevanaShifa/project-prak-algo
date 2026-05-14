@@ -1,7 +1,7 @@
 #include<iostream>
 #include<iomanip>
 using namespace std;
-
+//ppp
 struct Barang{
     string nama;
     string loc;
