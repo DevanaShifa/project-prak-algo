@@ -6,6 +6,7 @@ struct Barang{
     string nama;
     string loc;
     string tanggal;
+    int id;
 };
 
 Barang brg[100];
@@ -162,113 +163,72 @@ void selectionSort() {
     }
     cout << "\nData setelah Selection Sort:\n";
     tampilBarang();
+void sequentialSearch(int arr[], int n, int key){
+    bool found = false;
+
+    for(int i = 0; i<n; i++){
+        if(arr[i]==key){
+            cout << "Data ditemukan!";
+            found = true;
+            break;
+        }
+    }
+    if(!found){
+        cout << "Data Tidak ditemukan!"<< endl;
+    }
 }
 
-void insertionShort(){
-    int i, j;
+void shellsort(int arr[], int n){
+    for(int gap = n/2; gap>0; gap /=2){
+        for(int i = gap; i<n; i++){
+            int temp = arr[i];
+            int j;
+            
+            for(int j = i; j >=gap && arr[j-gap] > temp; j-= gap){
+                arr[j]=arr[j-gap];
+            }
+            arr[j] = temp;
+        }
+    }
+}
 
-    for(i = 1; i < jumlahBarang; i++){
-        eBox[i] = listAnggotaSorted[i];
-        j = i - 1;
-        while ((j >= 0) && (listAnggotaSorted[j].noAnggota > eBox[i].noAnggota)){
-            listAnggotaSorted[j+1] = listAnggotaSorted[j];
+void insertionSort(int arr[], int n){
+    int temp, i, j;
+    for(i=1; i<n; i++){
+        temp = arr[i];
+        j=i-1;
+        while ((j >= 0) && (arr[j]> temp)){
+            arr[j+1]=arr[j];
             j--;
         }
-        listAnggotaSorted[j+1] = eBox[i];
-    }
-    tampilData(listAnggotaSorted);
-};
-
-void shellSort() {
-    int i, j, k;
-
-    for (i = jumlahBarang / 2; i > 0; i = i / 2) {
-        for (j = i; j < jumlahBarang; j++) {
-            for (k = j - i; k >= 0; k = k - i) {
-                if (listAnggotaSorted[k + i].noAnggota < listAnggotaSorted[k].noAnggota) {
-                    swap(listAnggotaSorted[k], listAnggotaSorted[k + i]);
-                }
-            }
-        }
-    }
-
-    cout << "Data Setelah Shell Sort:" << endl;
-    tampilData(listAnggotaSorted);
-}
-
-int partition(int low, int high){
-    int pivot = listAnggotaSorted[high].noAnggota;
-    int i = low - 1;
-
-    for(int j = low; j < high; j++){
-        if(listAnggotaSorted[j].noAnggota <= pivot){
-            i++;
-            swap(listAnggotaSorted[i], listAnggotaSorted[j]);
-        }
-    }
-
-    swap(listAnggotaSorted[i + 1], listAnggotaSorted[high]);
-    return i + 1;
-}
-
-void quickSort(int low, int high){
-    if(low < high){
-        int pi = partition(low, high);
-        quickSort(low, pi - 1);
-        quickSort(pi + 1, high);
+        arr[j+1] = temp;
     }
 }
 
-void quickSortDisplay() 
-    quickSort(0, jumlahBarang - 1);
-    tampilData(listAnggotaSorted);
-}
+void listsorting(){
+    int menu;
+    cout << "===== MENU SORTING =====";
+    cout << "1. Bubble Sort\n"
+         << "2. Insertion Sort\n"
+         << "3. Selection Sort\n"
+         << "4. Shell Sort\n"
+         << "5. Quick Sort\n"
+         << "6. Merge Sort\n"
+         << "--------------------\n"
+         << "Pilih : "; cin >> menu;
+    cout << endl;
 
-void merge(int left, int mid, int right){
-    int i = left;
-    int j = mid + 1;
-    int k = left;
-
-    while (i <= mid && j <= right){
-        if(listAnggotaSorted[i].noAnggota < listAnggotaSorted[j].noAnggota){
-            eBox[k] = listAnggotaSorted[i]; 
-            i++;
-        } else {
-            eBox[k] = listAnggotaSorted[j];
-            j++;
-        }
-        k++;
+    switch(menu){
+        case 1:
+        break;
+        case 2:
+        break;
+        case 3:
+        break;
+        case 4:
+        
+        case 5:
     }
-
-    while(i <= mid){
-        eBox[k] = listAnggotaSorted[i];
-        i++; 
-        k++;
-    }
-    
-    while(j <= right){
-        eBox[k] = listAnggotaSorted[j];
-        j++; 
-        k++;
-    }
-    
-    for(int x = left; x <= right; x++){
-        listAnggotaSorted[x] = eBox[x];
-    }
-}
-
-void mergeSort(int left, int right){
-    if(left < right){
-        int mid = (left + right) / 2;
-        mergeSort(left, mid);
-        mergeSort(mid + 1, right);
-        merge(left, mid, right);
-    }
-}
-
-void mergeSortDisplay()
-    mergeSort(0, jumlahBarang - 1);
-    tampilData(listAnggotaSorted);
 }
 
 int main(){
