@@ -68,38 +68,15 @@ void tampilBarang(){
     cout << endl;
 }
 
-void menuSearch(){
-    int pilih;
-
-    cout << "\n====MENU SERACHING====\n";
-    cout << "1. SEQUENTIAL SEARCH\n';
-    cout << "2. BINARY SEARCH\n";
-    cout << "========================\n";
-    cout << "pilihan: ";
-    cin >> pilih;
-
-    switch(pilih){
-    case 1:
-        //sequen
-        break;
-    case 2:
-        binarySearch();
-        break;
-
-        default:
-            cout << "Pilihan Tidak Ada!\n";
-    }
-}
-
 //Searching
-void binarysearch(){
+void binarySearch(){
     //data harus sudah terurut
     bubbleSort();
 
     string cari;
     cout << "\nMasukan nama barang yang dicari: ";
     cin.ignore();
-    getline(cin.cari);
+    getline(cin, cari);
 
     int awal = 0;
     int akhir = jumlahBarang - 1;
@@ -143,7 +120,6 @@ void bubbleSort() {
 void bubbleSortDisplay() {
     bubbleSort();
     cout << "\nData setelah Bubble Sort:\n";
-    tampilData();
 }
 
 void selectionSort() {
@@ -163,7 +139,9 @@ void selectionSort() {
     }
     cout << "\nData setelah Selection Sort:\n";
     tampilBarang();
-void sequentialSearch(int arr[], int n, int key){
+}
+
+void sequentialSearch(int arr[], int n, int key) {
     bool found = false;
 
     for(int i = 0; i<n; i++){
@@ -231,6 +209,29 @@ void listsorting(){
     }
 }
 
+void menuSearch(){
+    int pilih;
+
+    cout << "\n====MENU SERACHING====\n";
+    cout << "1. SEQUENTIAL SEARCH\n";
+    cout << "2. BINARY SEARCH\n";
+    cout << "========================\n";
+    cout << "pilihan: ";
+    cin >> pilih;
+
+    switch(pilih){
+    case 1:
+        //sequen
+        break;
+    case 2:
+        binarySearch();
+        break;
+
+        default:
+            cout << "Pilihan Tidak Ada!\n";
+    }
+}
+
 int main(){
     int menu;
     bool lanjut = true;
@@ -247,25 +248,25 @@ int main(){
     cin >> menu;
 
     switch (menu){
-    case 1:
-        inputDataBarang();
-        lanjut = kembali();
-        break;
-    case 2:
-        tampilBarang();
-        lanjut = kembali();
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-    
-        break;
-    
-    default:
-        break;
+        case 1:
+            inputDataBarang();
+            lanjut = kembali();
+            break;
+        case 2:
+            tampilBarang();
+            lanjut = kembali();
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+        
+            break;
+        
+        default:
+            break;
+        }
     }
-}
-cout << "Program selesai." << endl;
+    cout << "Program selesai." << endl;
 }
