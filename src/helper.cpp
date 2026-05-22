@@ -8,7 +8,7 @@ using namespace std;
  * @param msg pesan input yang ditampilkan
  * @param output nilai int yang telah di konversi dari `input`
  */
-void inputAngka(string msg, int& output) {
+void inputInt(string msg, int& output) {
     string input;
 
     while (true)
