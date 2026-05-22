@@ -9,3 +9,8 @@ struct Barang {
     char tanggal[50];
     char waktu[50];
 };
+
+extern int totalBarang;
+extern Barang dataBarang[100];
+
+void inputBarang();
