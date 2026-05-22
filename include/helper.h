@@ -4,6 +4,12 @@
 using namespace std;
 
 /**
+ * menimpa baris sebelumnya
+ * @param jump jumlah baris yang akan ditimpa
+ */
+void overwriteAbove(int jump);
+
+/**
  * validasi input agar program tidak error ketika tipe data tidak sesuai
  * @param msg pesan output yang ditampilkan
  * @param value variabel penyimpan input
