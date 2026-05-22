@@ -1,7 +1,7 @@
 #include <iostream>
-#include "../include/display.h"
-#include "../include/barang.h"
-#include "../include/helper.h"
+#include "display.h"
+#include "barang.h"
+#include "helper.h"
 using namespace std;
 
 #define CLEAR_SCREEN system("clear")
