@@ -9,6 +9,9 @@ using namespace std;
  */
 void overwriteAbove(int jump);
 
+void saveBarangAsFile(const string& name);
+void readBarangFromFile(const string& name);
+
 /**
  * validasi input agar program tidak error ketika tipe data tidak sesuai
  * @param msg pesan output yang ditampilkan
