@@ -37,7 +37,7 @@ void inputBarang() {
         rangedInput<int>("- Bulan (1-12)       : ", bulan, 1, 12);
         rangedInput<int>("- Tahun              : ", tahun, 2000, 9999);
 
-        snprintf(dataBarang[i].tanggal, 50,
+        snprintf(dataBarang[totalBarang].tanggal, 50,
                 "%d/%d/%d",
                 hari,
                 bulan,
@@ -45,23 +45,22 @@ void inputBarang() {
         );
 
         overwriteAbove(4);
-        cout << "Tanggal              : " << dataBarang[i].tanggal << endl;
+        cout << "Tanggal              : " << dataBarang[totalBarang].tanggal << endl;
 
         cout << "Waktu: " << endl;
-        rangedInput<int>("- Jam (0-23)         : ", jam, 0, 11);
+        rangedInput<int>("- Jam (0-23)         : ", jam, 0, 23);
         rangedInput<int>("- Menit (0-59)       : ", menit, 0, 59);
 
-        snprintf(dataBarang[i].waktu, 50,
-                "%d:%d",
+        snprintf(dataBarang[totalBarang].waktu, 50,
+                "%02d:%02d",
                 jam,
                 menit
         );
 
         overwriteAbove(3);
-        cout << "Waktu                : " << dataBarang[i].waktu << endl;
+        cout << "Waktu                : " << dataBarang[totalBarang].waktu << endl;
 
         totalBarang++;
-
     }
     cout << "\nData berhasil ditambahkan!\n";
 }
