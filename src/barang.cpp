@@ -62,5 +62,7 @@ void inputBarang() {
 
         totalBarang++;
     }
+
+    saveBarangAsFile("test.bin");
     cout << "\nData berhasil ditambahkan!\n";
 }

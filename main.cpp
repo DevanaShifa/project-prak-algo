@@ -7,7 +7,7 @@ using namespace std;
 
 // debugging
 int main() {
-    // inputBarang();
+    readBarangFromFile("test.bin");
 
     int menu;
 
@@ -27,11 +27,16 @@ int main() {
             inputBarang();
             break;
         
+        
+        case 0:
+            cout << "Keluar..." << endl;
+            break;
+
         default:
             cout << "Menu tidak valid!" << endl;
             cin.ignore();
             cin.get();
             break;
         }
-    } while (menu != 6);
+    } while (menu != 0);
 }
