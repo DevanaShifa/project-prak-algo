@@ -3,11 +3,15 @@
 #include <sstream>
 using namespace std;
 
+void showTitle();
+
 /**
  * menimpa baris sebelumnya
  * @param jump jumlah baris yang akan ditimpa
  */
 void overwriteAbove(int jump);
+
+// void sequentialSearch();
 
 void saveBarangAsFile(const string& name);
 void readBarangFromFile(const string& name);
