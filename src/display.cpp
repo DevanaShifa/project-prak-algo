@@ -5,7 +5,7 @@
 #include "helper.h"
 using namespace std;
 
-void tampilHint() {
+void showHint() {
     cout << "Hint:" << endl;
     cout << setfill(' ');
     cout << left
@@ -20,7 +20,7 @@ void tampilHint() {
     cout << setfill('-') << setw(90) << "" << endl;
 }
 
-void tampilData() {
+void showData() {
     cout << setfill('-') << setw(90) << "" << endl;
 
     cout << setfill(' ');
@@ -47,4 +47,56 @@ void tampilData() {
             << endl;
     }
     cout << setfill('-') << setw(90) << "" << endl;
+}
+
+void showSaveSetting() {
+    string fileName;
+
+    overwriteAbove(1);
+    cout << "Save" << endl;
+    cout << setfill('-') << setw(90) << "" << endl;
+    cout << "Nama file: "; cin >> fileName;
+    saveBarangAsFile(fileName);
+
+    cout << "\nData berhasil di simpan..." << endl;
+    cin.get();
+}
+
+void showLoadSetting() {
+    string fileName;
+
+    overwriteAbove(1);
+    cout << "Load" << endl;
+    cout << setfill('-') << setw(90) << "" << endl;
+    cout << "Nama file: "; cin >> fileName;
+    readBarangFromFile(fileName);
+
+    cout << "\nData berhasil di muat..." << endl;
+    cin.get();
+}
+
+void showSettings() {
+    int menu;
+
+    CLEAR_SCREEN;
+    cout << "Settings" << endl;
+    cout << setfill('-') << setw(90) << "" << endl;
+    cout << "1. Save" << endl
+         << "2. Load" << endl
+         << "3. Ubah algoritma sorting" << endl
+         << "4. Ubah algoritma searching" << endl;
+    safeInput<int>("> ", menu);
+
+    switch (menu)
+    {
+    case 1:
+        showSaveSetting();
+        break;
+    case 2:
+        showLoadSetting();
+        break;
+    
+    default:
+        break;
+    }
 }

@@ -14,11 +14,10 @@ int main() {
     do
     {
         CLEAR_SCREEN;
-
         showTitle();
 
-        tampilData();
-        tampilHint();
+        showData();
+        showHint();
 
         safeInput<int>("> ", menu);
 
@@ -30,7 +29,9 @@ int main() {
         case 2:
             inputBarang();
             break;
-        
+        case 5:
+            showSettings();
+            break;
         
         case 0:
             cout << "Keluar..." << endl;

@@ -2,5 +2,6 @@
 
 #define CLEAR_SCREEN system("clear")
 
-void tampilData();
-void tampilHint();
+void showData();
+void showHint();
+void showSettings();
