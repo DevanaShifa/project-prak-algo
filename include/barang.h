@@ -14,3 +14,4 @@ extern int totalBarang;
 extern Barang dataBarang[100];
 
 void inputBarang();
+void pilihBarang();
