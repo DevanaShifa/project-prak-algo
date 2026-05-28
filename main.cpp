@@ -14,6 +14,9 @@ int main() {
     do
     {
         CLEAR_SCREEN;
+
+        showTitle();
+
         tampilData();
         tampilHint();
 
@@ -22,6 +25,7 @@ int main() {
         switch (menu)
         {
         case 1:
+            pilihBarang();
             break;
         case 2:
             inputBarang();
@@ -34,8 +38,7 @@ int main() {
 
         default:
             cout << "Menu tidak valid!" << endl;
-            cin.ignore();
-            cin.get();
+            cout << "> ";
             break;
         }
     } while (menu != 0);
