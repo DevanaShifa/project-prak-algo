@@ -9,6 +9,25 @@ using namespace std;
 int totalBarang = 0;
 Barang dataBarang[100];
 
+void pilihBarang() {
+    int idx;
+    overwriteAbove(1);
+    rangedInput("Pilih Id Barang: ", idx, 1, totalBarang);
+
+    CLEAR_SCREEN;
+
+    cout << "Id Barang          : " << dataBarang[idx-1].idBarang << endl;
+    cout << "Nama Barang        : " << dataBarang[idx-1].namaBarang << endl;
+    cout << "Nama Barang        : " << dataBarang[idx-1].namaBarang << endl;
+    cout << "Deskripsi          : " << dataBarang[idx-1].deskripsi << endl;
+    cout << "Lokasi             : " << dataBarang[idx-1].lokasi << endl;
+    cout << "Tanggal            : " << dataBarang[idx-1].tanggal << endl;
+    cout << "Waktu              : " << dataBarang[idx-1].waktu << endl;
+
+    cout << "Tekan enter untuk melanjutkan...";
+    cin.get();
+}
+
 void inputBarang() {
     CLEAR_SCREEN;
 
