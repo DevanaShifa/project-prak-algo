@@ -10,11 +10,11 @@ void tampilHint() {
     cout << setfill(' ');
     cout << left
         << setw(30) << "[1] Pilih Barang"
-        << setw(30) << "[3] Cari Barang"
+        << setw(30) << "[3] Sort Barang"
         << setw(30) << "[5] Pengaturan"
         << endl
         << setw(30) << "[2] Buat Laporan"
-        << setw(30) << "[4] Sort Barang"
+        << setw(30) << "[4] Hapus Barang"
         << setw(30) << "[0] Kembali/Keluar"
         << endl;
     cout << setfill('-') << setw(90) << "" << endl;
