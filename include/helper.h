@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <sstream>
 using namespace std;
 
@@ -11,10 +12,11 @@ void showTitle();
  */
 void overwriteAbove(int jump);
 
-// void sequentialSearch();
-
 void saveBarangAsFile(const string& name);
-void readBarangFromFile(const string& name);
+void loadBarangFromFile(const string& name);
+
+void saveSettingAsFile();
+void loadSettingFromFile();
 
 /**
  * validasi input agar program tidak error ketika tipe data tidak sesuai
