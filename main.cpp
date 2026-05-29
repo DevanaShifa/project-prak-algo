@@ -2,12 +2,14 @@
 #include "display.h"
 #include "barang.h"
 #include "helper.h"
+#include "setting.h"
 
 using namespace std;
 
 // debugging
 int main() {
-    readBarangFromFile("test.bin");
+    loadSettingFromFile();
+    loadBarangFromFile(setting.loadedFile);
 
     int menu;
 
