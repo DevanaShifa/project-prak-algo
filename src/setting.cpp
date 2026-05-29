@@ -1,5 +1,5 @@
 #include <iostream>
-#include "setting.h"
+#include "setting.hpp"
 
 Setting setting;
 

@@ -1,9 +1,9 @@
 #include <iostream>
 #include <iomanip>
-#include "barang.h"
-#include "display.h"
-#include "helper.h"
-#include "setting.h"
+#include "barang.hpp"
+#include "display.hpp"
+#include "helper.hpp"
+#include "setting.hpp"
 
 using namespace std;
 

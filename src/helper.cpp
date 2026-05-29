@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include "helper.h"
-#include "barang.h"
-#include "setting.h"
+#include "helper.hpp"
+#include "barang.hpp"
+#include "setting.hpp"
 
 #define MKDIR system("mkdir -p .lnfdata")
 
