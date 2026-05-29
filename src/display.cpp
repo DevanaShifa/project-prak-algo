@@ -3,6 +3,7 @@
 #include "display.h"
 #include "barang.h"
 #include "helper.h"
+#include "setting.h"
 using namespace std;
 
 void showHint() {
@@ -58,6 +59,9 @@ void showSaveSetting() {
     cout << "Nama file: "; cin >> fileName;
     saveBarangAsFile(fileName);
 
+    setting.loadedFile = fileName;
+    saveSettingAsFile();
+
     cout << "\nData berhasil di simpan..." << endl;
     cin.get();
 }
@@ -69,34 +73,46 @@ void showLoadSetting() {
     cout << "Load" << endl;
     cout << setfill('-') << setw(90) << "" << endl;
     cout << "Nama file: "; cin >> fileName;
-    readBarangFromFile(fileName);
+    loadBarangFromFile(fileName);
 
-    cout << "\nData berhasil di muat..." << endl;
+    setting.loadedFile = fileName;
+    saveSettingAsFile();
+
     cin.get();
 }
 
 void showSettings() {
     int menu;
 
-    CLEAR_SCREEN;
-    cout << "Settings" << endl;
-    cout << setfill('-') << setw(90) << "" << endl;
-    cout << "1. Save" << endl
-         << "2. Load" << endl
-         << "3. Ubah algoritma sorting" << endl
-         << "4. Ubah algoritma searching" << endl;
-    safeInput<int>("> ", menu);
-
-    switch (menu)
+    do
     {
-    case 1:
-        showSaveSetting();
-        break;
-    case 2:
-        showLoadSetting();
-        break;
+        CLEAR_SCREEN;
+        cout << "Settings" << endl;
+        cout << setfill('-') << setw(90) << "" << endl;
+        cout << "1. Save" << endl
+             << "2. Load" << endl
+             << "3. Ubah algoritma sorting" << endl
+             << "4. Ubah algoritma searching" << endl
+             << "0. Back" << endl;
+        cout << setfill('-') << setw(90) << "" << endl;
+        safeInput<int>("> ", menu);
     
-    default:
-        break;
-    }
+        switch (menu)
+        {
+        case 1:
+            showSaveSetting();
+            break;
+        case 2:
+            showLoadSetting();
+            break;
+        case 0:
+            break;
+        
+        default:
+            cout << "Pilihan tidak ada!" << endl;
+            cout << "Tekan enter untuk melanjutkan...";
+            cin.get();
+            break;
+        }
+    } while (menu != 0);
 }
