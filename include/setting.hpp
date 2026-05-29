@@ -20,3 +20,6 @@ struct Setting {
 extern Setting setting;
 
 void initSetting();
+
+void saveSettingAsFile();
+void loadSettingFromFile();

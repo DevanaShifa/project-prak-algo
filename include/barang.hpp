@@ -15,3 +15,6 @@ extern Barang dataBarang[100];
 
 void inputBarang();
 void pilihBarang();
+
+void saveBarangAsFile(const string& name);
+void loadBarangFromFile(const string& name);

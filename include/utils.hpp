@@ -3,17 +3,14 @@
 #include <sstream>
 using namespace std;
 
+#define MKDIR system("mkdir -p .lnfdata")
+#define CLEAR_SCREEN system("clear")
+
 /**
  * menimpa baris sebelumnya
  * @param jump jumlah baris yang akan ditimpa
  */
 void overwriteAbove(int jump);
-
-void saveBarangAsFile(const string& name);
-void loadBarangFromFile(const string& name);
-
-void saveSettingAsFile();
-void loadSettingFromFile();
 
 /**
  * validasi input agar program tidak error ketika tipe data tidak sesuai

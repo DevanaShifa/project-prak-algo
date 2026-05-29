@@ -1,14 +1,62 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include "barang.hpp"
 #include "display.hpp"
-#include "helper.hpp"
+#include "utils.hpp"
 #include "setting.hpp"
 
 using namespace std;
 
 int totalBarang = 0;
 Barang dataBarang[100];
+
+
+void saveBarangAsFile(const string& name) {
+    MKDIR;
+    ofstream File(".lnfdata/"+name, ios::binary);
+
+    if (File.is_open()) {
+        File.write(
+            reinterpret_cast<char*>(&totalBarang),
+            sizeof(totalBarang)
+        );
+
+        File.write(
+            reinterpret_cast<char*>(dataBarang),
+            sizeof(Barang) * totalBarang
+        );
+
+        File.close();
+    } else {
+        cout << "Gagal membuat file." << endl;
+    }
+}
+
+void loadBarangFromFile(const string& name) {
+    MKDIR;
+    ifstream File(".lnfdata/"+name);
+
+    if (File.is_open()) {
+        File.read(
+            reinterpret_cast<char*>(&totalBarang),
+            sizeof(totalBarang)
+        );
+
+        File.read(
+            reinterpret_cast<char*>(dataBarang),
+            sizeof(Barang) * totalBarang
+        );
+
+        cout << "\nData berhasil di muat..." << endl;
+        File.close();
+    } else {
+        cout << "File tidak ditemukan." << endl;
+        cout << "Tekan enter untuk melanjutkan...";
+        cin.get();
+    }
+}
+
 
 void pilihBarang() {
     int idx;
