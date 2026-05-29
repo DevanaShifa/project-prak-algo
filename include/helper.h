@@ -3,8 +3,6 @@
 #include <sstream>
 using namespace std;
 
-void showTitle();
-
 /**
  * menimpa baris sebelumnya
  * @param jump jumlah baris yang akan ditimpa

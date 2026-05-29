@@ -6,17 +6,6 @@
 
 #define MKDIR system("mkdir -p .lnfdata")
 
-void showTitle() {
-std::cout << 
-R"(
- _              _             _____                     _ 
-| |    ___  ___| |_   _ __   |  ___|__  _   _ _ __   __| |
-| |   / _ \/ __| __| | '_ \  | |_ / _ \| | | | '_ \ / _` |
-| |__| (_) \__ \ |_  | | | | |  _| (_) | |_| | | | | (_| |
-|_____\___/|___/\__| |_| |_| |_|  \___/ \__,_|_| |_|\__,_|
-)" << endl;
-}
-
 void overwriteAbove(int jump) {
     for (int i = 0; i < jump; i++) {
         std::cout << "\033[A";
