@@ -7,6 +7,7 @@ add_executable(LostNFound
   src/barang.cpp
   src/display.cpp
   src/helper.cpp
+  src/setting.cpp
 )
 
 target_include_directories(LostNFound PRIVATE include)
