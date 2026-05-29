@@ -3,6 +3,7 @@
 #include "barang.h"
 #include "display.h"
 #include "helper.h"
+#include "setting.h"
 
 using namespace std;
 
@@ -82,6 +83,6 @@ void inputBarang() {
         totalBarang++;
     }
 
-    saveBarangAsFile("test.bin");
+    saveBarangAsFile(setting.loadedFile);
     cout << "\nData berhasil ditambahkan!\n";
 }
