@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
-#include "setting.hpp"
-#include "utils.hpp"
+#include "../include/setting.hpp"
+#include "../include/utils.hpp"
 
 using namespace std;
 

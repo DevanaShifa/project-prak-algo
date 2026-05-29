@@ -1,8 +1,8 @@
 #include <iostream>
-#include "display.hpp"
-#include "barang.hpp"
-#include "utils.hpp"
-#include "setting.hpp"
+#include "include/display.hpp"
+#include "include/barang.hpp"
+#include "include/utils.hpp"
+#include "include/setting.hpp"
 
 using namespace std;
 

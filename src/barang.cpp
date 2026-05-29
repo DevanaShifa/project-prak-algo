@@ -1,10 +1,10 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include "barang.hpp"
-#include "display.hpp"
-#include "utils.hpp"
-#include "setting.hpp"
+#include "../include/barang.hpp"
+#include "../include/display.hpp"
+#include "../include/utils.hpp"
+#include "../include/setting.hpp"
 
 using namespace std;
 
