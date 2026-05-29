@@ -2,8 +2,9 @@
 #include <fstream>
 #include "helper.h"
 #include "barang.h"
+#include "setting.h"
 
-#define MKDIR system("mkdir database")
+#define MKDIR system("mkdir -p .lnfdata")
 
 void showTitle() {
 std::cout << 
@@ -27,7 +28,7 @@ void overwriteAbove(int jump) {
 
 void saveBarangAsFile(const string& name) {
     MKDIR;
-    ofstream File("database/"+name, ios::binary);
+    ofstream File(".lnfdata/"+name, ios::binary);
 
     if (File.is_open()) {
         File.write(
@@ -46,9 +47,9 @@ void saveBarangAsFile(const string& name) {
     }
 }
 
-void readBarangFromFile(const string& name) {
+void loadBarangFromFile(const string& name) {
     MKDIR;
-    ifstream File("database/"+name);
+    ifstream File(".lnfdata/"+name);
 
     if (File.is_open()) {
         File.read(
@@ -61,8 +62,53 @@ void readBarangFromFile(const string& name) {
             sizeof(Barang) * totalBarang
         );
 
+        cout << "\nData berhasil di muat..." << endl;
         File.close();
     } else {
-        cout << "Gagal membaca file." << endl;
+        cout << "File tidak ditemukan." << endl;
+        cout << "Tekan enter untuk melanjutkan...";
+        cin.get();
+    }
+}
+
+void saveSettingAsFile() {
+    MKDIR;
+    ofstream File(".lnfdata/setting.txt");
+
+    if (File.is_open()) {
+        File << "loaded-file: " << setting.loadedFile << endl;
+        File << "sorting-algorithm: " << setting.sortingAlgorithm << endl;
+        File << "searching-algorithm: " << setting.searchAlgorithm;
+
+        File.close();
+    } else {
+        cout << "Gagal membuat file." << endl;
+    }
+}
+
+void loadSettingFromFile() {
+    MKDIR;
+    ifstream File(".lnfdata/setting.txt");
+
+    if (File.is_open()) {
+        string temp;
+
+        getline(File, temp, ':');
+        getline(File, setting.loadedFile);
+
+        setting.loadedFile.erase(0, 1);
+
+        getline(File, temp, ':');
+        File >> (int&)setting.sortingAlgorithm;
+
+        getline(File, temp);
+
+        getline(File, temp, ':');
+        File >> (int&)setting.searchAlgorithm;
+
+        File.close();
+    } else {
+        initSetting();
+        saveSettingAsFile();
     }
 }
