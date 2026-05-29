@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 enum SortAlg {
     Bubble,
@@ -11,9 +12,11 @@ enum SearchAlg {
 };
 
 struct Setting {
-    char loadedFile[50];
+    std::string loadedFile;
     SortAlg sortingAlgorithm;
     SearchAlg searchAlgorithm;
 };
 
 extern Setting setting;
+
+void initSetting();
