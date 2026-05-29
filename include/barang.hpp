@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 
 struct Barang {
     int idBarang;
@@ -16,5 +17,5 @@ extern Barang dataBarang[100];
 void inputBarang();
 void pilihBarang();
 
-void saveBarangAsFile(const string& name);
-void loadBarangFromFile(const string& name);
+void saveBarangAsFile(const std::string& name);
+void loadBarangFromFile(const std::string& name);
