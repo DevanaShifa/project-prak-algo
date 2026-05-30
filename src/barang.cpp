@@ -1,5 +1,4 @@
 #include "../include/barang.hpp"
-#include "../include/display.hpp"
 #include "../include/utils.hpp"
 #include "../include/setting.hpp"
 #include <iostream>
