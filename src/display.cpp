@@ -2,6 +2,7 @@
 #include "../include/barang.hpp"
 #include "../include/utils.hpp"
 #include "../include/setting.hpp"
+#include "../include/sorting.hpp"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -26,7 +27,7 @@ void showHint() {
         << setw(30) << "[5] Pengaturan"
         << endl
         << setw(30) << "[2] Buat Laporan"
-        << setw(30) << "[4] Hapus Barang"
+        << setw(30) << "[4] Cari Barang"
         << setw(30) << "[0] Kembali/Keluar"
         << endl;
     cout << setfill('-') << setw(90) << "" << endl;
@@ -59,6 +60,62 @@ void showData() {
             << endl;
     }
     cout << setfill('-') << setw(90) << "" << endl;
+}
+
+void showSort() {
+    int sort;
+
+    overwriteAbove(5);
+    cout << "Sort Berdasarkan:" << endl;
+    cout << setfill(' ');
+    cout << left
+        << setw(30) << "(1) ID"
+        << setw(30) << "(3) Kategori"
+        << setw(30) << "(5) Tanggal"
+        << endl
+        << setw(30) << "(2) Nama Barang"
+        << setw(30) << "(4) Lokasi"
+        << setw(30) << "(0) Kembali"
+        << endl;
+    cout << setfill('-') << setw(90) << "" << endl;
+    safeInput<int>("> ", sort);
+
+    switch (sort)
+    {
+    case 1:
+        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+            return a.idBarang > b.idBarang;
+        });
+        break;
+    case 2:
+        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+            return a.namaBarang[0] > b.namaBarang[0];
+        });
+        break;
+    case 3:
+        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+            return a.kategori[0] > b.kategori[0];
+        });
+        break;
+    case 4:
+        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+            return a.lokasi[0] > b.lokasi[0];
+        });
+        break;
+    case 5:
+        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+            return a.tanggal[0] > b.tanggal[0];
+        });
+        break;
+        
+    case 0:
+        break;
+    
+    default:
+        cout << "Menu tidak valid!" << endl;
+        cout << "> ";
+        break;
+    }
 }
 
 void showSaveSetting() {
