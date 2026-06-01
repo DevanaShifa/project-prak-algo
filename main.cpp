@@ -31,6 +31,9 @@ int main() {
         case 2:
             inputBarang();
             break;
+        case 3:
+            showSort();
+            break;
         case 5:
             showSettings();
             break;
