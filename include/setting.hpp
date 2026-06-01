@@ -3,11 +3,11 @@
 
 enum SortAlg {
     Bubble,
-    Insertion
+    Selection
 };
 
 enum SearchAlg {
-    Selection,
+    Sequential,
     Binary
 };
 
@@ -23,3 +23,16 @@ void initSetting();
 
 void saveSettingAsFile();
 void loadSettingFromFile();
+
+template<typename T, typename Compare>
+void sortData(T arr[], int size, Compare cmp) {
+    switch (setting.sortingAlgorithm) {
+        case Bubble:
+            bubbleSort(arr, size, cmp);
+            break;
+
+        case Selection:
+            selectionSort(arr, size, cmp);
+            break;
+    }
+}
