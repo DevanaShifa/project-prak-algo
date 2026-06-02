@@ -1,5 +1,7 @@
 #include "../include/setting.hpp"
 #include "../include/utils.hpp"
+#include "../include/barang.hpp"
+#include "../include/sorting.hpp"
 #include <iostream>
 #include <fstream>
 
@@ -53,5 +55,17 @@ void loadSettingFromFile() {
     } else {
         initSetting();
         saveSettingAsFile();
+    }
+}
+
+void selectSortData(Barang arr[], int size, LCompare cmp) {
+    switch (setting.sortingAlgorithm) {
+        case Bubble:
+            bubbleSort(arr, size, cmp);
+            break;
+
+        case Selection:
+            selectionSort(arr, size, cmp);
+            break;
     }
 }

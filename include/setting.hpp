@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "sorting.hpp"
 
 enum SortAlg {
     Bubble,
@@ -24,15 +25,4 @@ void initSetting();
 void saveSettingAsFile();
 void loadSettingFromFile();
 
-template<typename T, typename Compare>
-void sortData(T arr[], int size, Compare cmp) {
-    switch (setting.sortingAlgorithm) {
-        case Bubble:
-            bubbleSort(arr, size, cmp);
-            break;
-
-        case Selection:
-            selectionSort(arr, size, cmp);
-            break;
-    }
-}
+void selectSortData(Barang arr[], int size, LCompare cmp);

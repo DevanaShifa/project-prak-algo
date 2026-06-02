@@ -83,27 +83,27 @@ void showSort() {
     switch (sort)
     {
     case 1:
-        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.idBarang > b.idBarang;
         });
         break;
     case 2:
-        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.namaBarang[0] > b.namaBarang[0];
         });
         break;
     case 3:
-        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.kategori[0] > b.kategori[0];
         });
         break;
     case 4:
-        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.lokasi[0] > b.lokasi[0];
         });
         break;
     case 5:
-        sortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.tanggal[0] > b.tanggal[0];
         });
         break;
