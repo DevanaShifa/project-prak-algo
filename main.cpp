@@ -75,8 +75,7 @@ string toString(SortAlg alg) {
  * @param msg pesan output yang ditampilkan
  * @param value variabel penyimpan input
  */
-template<typename T>
-void safeInput(const string& msg, T& value) {
+void safeInput(const string& msg, int& value) {
     string input;
 
     while (true)
@@ -102,12 +101,11 @@ void safeInput(const string& msg, T& value) {
  * @param min nilai minimum
  * @param max nilai maksimum
  */
-template<typename T>
 void rangedInput(
     const string& msg,
-    T& value,
-    T min,
-    T max
+    int& value,
+    int min,
+    int max
 ) {
     string input;
 
