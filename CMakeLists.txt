@@ -8,6 +8,8 @@ add_executable(LostNFound
   src/display.cpp
   src/utils.cpp
   src/setting.cpp
+  src/sorting.cpp
+  src/searching.cpp
 )
 
 target_include_directories(LostNFound PRIVATE include)

@@ -11,7 +11,7 @@ void bubbleSort(Barang arr[], int size, LCompare cmp) {
             if (cmp(arr[j], arr[j+1])) {
                 std::swap(arr[j], arr[j+1]);
             }
-        }        
+        }
     }
 }
 
@@ -45,3 +45,18 @@ void insertionSort(Barang arr[], int size, LCompare cmp) {
     }
 }
 
+void shellSort(Barang arr[], int size, LCompare cmp) {
+    for (int gap = size/2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < size; i++)
+        {
+            Barang temp = arr[i];
+            int j;
+
+            for (j = i; j <= gap && cmp(arr[j - gap], temp); j -= gap)
+            {
+                arr[j] = arr[j - gap];
+            }            
+        }        
+    }    
+}

@@ -1,10 +1,14 @@
 #pragma once
+#include "setting.hpp"
 #include <iostream>
 #include <sstream>
 using namespace std;
 
-#define MKDIR system("mkdir -p .lnfdata")
+#define MKDIR_DATA system("mkdir -p .lnfdata")
+#define MKDIR_PRINT system("mkdir -p print")
 #define CLEAR_SCREEN system("clear")
+
+string toString(SortAlg alg);
 
 /**
  * menimpa baris sebelumnya

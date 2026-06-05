@@ -1,21 +1,18 @@
 #pragma once
 #include <iostream>
 #include "sorting.hpp"
+#include "barang.hpp"
 
 enum SortAlg {
     Bubble,
-    Selection
-};
-
-enum SearchAlg {
-    Sequential,
-    Binary
+    Selection,
+    Insertion,
+    Shell,
 };
 
 struct Setting {
     std::string loadedFile;
     SortAlg sortingAlgorithm;
-    SearchAlg searchAlgorithm;
 };
 
 extern Setting setting;
@@ -25,4 +22,6 @@ void initSetting();
 void saveSettingAsFile();
 void loadSettingFromFile();
 
-void selectSortData(Barang arr[], int size, LCompare cmp);
+void selectSortAlg();
+
+void handleSortData(Barang arr[], int size, LCompare cmp);

@@ -8,11 +8,10 @@
 using namespace std;
 
 int totalBarang = 0;
-Barang dataBarang[100];
+Barang dataBarang[256];
 
 
 void saveBarangAsFile(const string& name) {
-    MKDIR;
     ofstream File(".lnfdata/"+name, ios::binary);
 
     if (File.is_open()) {
@@ -33,7 +32,6 @@ void saveBarangAsFile(const string& name) {
 }
 
 void loadBarangFromFile(const string& name) {
-    MKDIR;
     ifstream File(".lnfdata/"+name);
 
     if (File.is_open()) {
@@ -46,8 +44,7 @@ void loadBarangFromFile(const string& name) {
             reinterpret_cast<char*>(dataBarang),
             sizeof(Barang) * totalBarang
         );
-
-        cout << "\nData berhasil di muat..." << endl;
+        
         File.close();
     } else {
         cout << "File tidak ditemukan." << endl;
@@ -56,24 +53,111 @@ void loadBarangFromFile(const string& name) {
     }
 }
 
+void saveKlaimAsFile(Klaim klaim) {
+    string fileName = "print/data-"+string(klaim.namaPengambil)+"-"+to_string(klaim.idBarang);
+    ofstream File(fileName+".txt");
+
+    if (File.is_open()) {
+        File << "========================== Lost & Found ==========================" << endl;
+        File << "Nama Pengambil : " << klaim.namaPengambil << endl;
+        File << "Tanggal Klaim  : " << klaim.tanggalKlaim << endl;
+        File << "Waktu Klaim    : " << klaim.waktuKlaim << endl << endl;
+
+        File << "Id Barang      : " << klaim.idBarang << endl;
+        File << "Nama Barang    : " << dataBarang[klaim.idBarang].namaBarang << endl;
+        File << "Deskripsi      : " << dataBarang[klaim.idBarang].deskripsi << endl;
+        File << "========================== Lost & Found ==========================" << endl;
+        File.close();
+    }
+}
+
+void klaimBarang(int idx) {
+    Klaim klaim;
+    int hari, bulan, tahun, jam, menit;
+
+    cout << "Nama penerima: ";
+    cin.getline(klaim.namaPengambil, 50);
+    
+    cout << endl << "Tanggal: " << endl;
+    rangedInput("- Hari (1-31)        : ", hari, 1, 31);
+    rangedInput("- Bulan (1-12)       : ", bulan, 1, 12);
+    rangedInput("- Tahun              : ", tahun, 2000, 9999);
+
+    snprintf(klaim.tanggalKlaim, 50,
+            "%d/%d/%d",
+            hari,
+            bulan,
+            tahun
+    );
+
+    overwriteAbove(4);
+
+    cout << "Tanggal              : " << klaim.tanggalKlaim << endl;
+
+    cout << "Waktu: " << endl;
+    rangedInput("- Jam (0-23)         : ", jam, 0, 23);
+    rangedInput("- Menit (0-59)       : ", menit, 0, 59);
+
+    snprintf(klaim.waktuKlaim, 50,
+            "%02d:%02d",
+            jam,
+            menit
+    );
+
+    overwriteAbove(3);
+    cout << "Waktu                : " << klaim.waktuKlaim << endl;
+
+    
+    saveKlaimAsFile(klaim);
+    saveBarangAsFile(setting.loadedFile);
+    dataBarang[idx].diKlaim = true;
+
+    cout << setfill('-') << setw(90) << "" << endl;
+    cout << "Laporan klaim barang di simpan ke 'print/data" << dataBarang[idx].idBarang << ".txt'" << endl;
+    cin.get();
+}
 
 void pilihBarang() {
+    int menu;
+
     int idx;
     overwriteAbove(1);
     rangedInput("Pilih Id Barang: ", idx, 1, totalBarang);
 
+    Barang *barangDipilih = nullptr;
+
+    for (int i = 0; i < totalBarang; i++)
+    {
+        if (dataBarang[i].idBarang != idx) continue;
+        else if (dataBarang[i].diKlaim) {
+            cout << "Barang sudah diklaim.";
+            cin.get();
+            return;
+        } else {
+            barangDipilih = &dataBarang[i];
+        }
+    }
+    
+
     CLEAR_SCREEN;
 
-    cout << "Id Barang          : " << dataBarang[idx-1].idBarang << endl;
-    cout << "Nama Barang        : " << dataBarang[idx-1].namaBarang << endl;
-    cout << "Nama Barang        : " << dataBarang[idx-1].namaBarang << endl;
-    cout << "Deskripsi          : " << dataBarang[idx-1].deskripsi << endl;
-    cout << "Lokasi             : " << dataBarang[idx-1].lokasi << endl;
-    cout << "Tanggal            : " << dataBarang[idx-1].tanggal << endl;
-    cout << "Waktu              : " << dataBarang[idx-1].waktu << endl;
+    cout << "Id Barang          : " <<  barangDipilih->idBarang << endl;
+    cout << "Nama Barang        : " <<  barangDipilih->namaBarang << endl;
+    cout << "Nama Barang        : " <<  barangDipilih->namaBarang << endl;
+    cout << "Deskripsi          : " <<  barangDipilih->deskripsi << endl;
+    cout << "Lokasi             : " <<  barangDipilih->lokasi << endl;
+    cout << "Tanggal            : " <<  barangDipilih->tanggal << endl;
+    cout << "Waktu              : " <<  barangDipilih->waktu << endl;
 
-    cout << "Tekan enter untuk melanjutkan...";
-    cin.get();
+    cout << setfill('-') << setw(90) << "" << endl;
+    cout << "1. Klaim Barang" << endl;
+    cout << "0. Keluar" << endl;
+    cout << setfill('-') << setw(90) << "" << endl;
+    safeInput("Pilih: ", menu);
+
+    if (menu == 1) {
+        klaimBarang(idx-1);
+    }
 }
 
 void inputBarang() {
@@ -85,7 +169,7 @@ void inputBarang() {
     cout << setfill(' ') << setw(50) << "INPUT DATA" << endl;
     cout << setfill('-') << setw(90) << "" << endl;
 
-    safeInput<int>("Banyak data yang ingin diinput: ", jumlah);
+    safeInput("Banyak data yang ingin diinput: ", jumlah);
 
     for (int i = 0; i < jumlah; i++) {
         int hari, bulan, tahun;
@@ -100,9 +184,9 @@ void inputBarang() {
         cout << "Lokasi               : "; cin.getline(dataBarang[totalBarang].lokasi, 50);
 
         cout << endl << "Tanggal: " << endl;
-        rangedInput<int>("- Hari (1-31)        : ", hari, 1, 31);
-        rangedInput<int>("- Bulan (1-12)       : ", bulan, 1, 12);
-        rangedInput<int>("- Tahun              : ", tahun, 2000, 9999);
+        rangedInput("- Hari (1-31)        : ", hari, 1, 31);
+        rangedInput("- Bulan (1-12)       : ", bulan, 1, 12);
+        rangedInput("- Tahun              : ", tahun, 2000, 9999);
 
         snprintf(dataBarang[totalBarang].tanggal, 50,
                 "%d/%d/%d",
@@ -115,8 +199,8 @@ void inputBarang() {
         cout << "Tanggal              : " << dataBarang[totalBarang].tanggal << endl;
 
         cout << "Waktu: " << endl;
-        rangedInput<int>("- Jam (0-23)         : ", jam, 0, 23);
-        rangedInput<int>("- Menit (0-59)       : ", menit, 0, 59);
+        rangedInput("- Jam (0-23)         : ", jam, 0, 23);
+        rangedInput("- Menit (0-59)       : ", menit, 0, 59);
 
         snprintf(dataBarang[totalBarang].waktu, 50,
                 "%02d:%02d",

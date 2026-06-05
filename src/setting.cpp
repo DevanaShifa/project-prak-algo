@@ -12,18 +12,15 @@ Setting setting;
 void initSetting() {
     setting.loadedFile = "database";
     setting.sortingAlgorithm = SortAlg::Bubble;
-    setting.searchAlgorithm = SearchAlg::Sequential;
 }
 
 
 void saveSettingAsFile() {
-    MKDIR;
     ofstream File(".lnfdata/setting.txt");
 
     if (File.is_open()) {
         File << "loaded-file: " << setting.loadedFile << endl;
-        File << "sorting-algorithm: " << setting.sortingAlgorithm << endl;
-        File << "searching-algorithm: " << setting.searchAlgorithm;
+        File << "sorting-algorithm: " << setting.sortingAlgorithm;
 
         File.close();
     } else {
@@ -32,7 +29,6 @@ void saveSettingAsFile() {
 }
 
 void loadSettingFromFile() {
-    MKDIR;
     ifstream File(".lnfdata/setting.txt");
 
     if (File.is_open()) {
@@ -46,11 +42,6 @@ void loadSettingFromFile() {
         getline(File, temp, ':');
         File >> (int&)setting.sortingAlgorithm;
 
-        getline(File, temp);
-
-        getline(File, temp, ':');
-        File >> (int&)setting.searchAlgorithm;
-
         File.close();
     } else {
         initSetting();
@@ -58,7 +49,7 @@ void loadSettingFromFile() {
     }
 }
 
-void selectSortData(Barang arr[], int size, LCompare cmp) {
+void handleSortData(Barang arr[], int size, LCompare cmp) {
     switch (setting.sortingAlgorithm) {
         case Bubble:
             bubbleSort(arr, size, cmp);
@@ -66,6 +57,14 @@ void selectSortData(Barang arr[], int size, LCompare cmp) {
 
         case Selection:
             selectionSort(arr, size, cmp);
+            break;
+
+        case Insertion:
+            insertionSort(arr, size, cmp);
+            break;
+
+        case Shell:
+            shellSort(arr, size, cmp);
             break;
     }
 }

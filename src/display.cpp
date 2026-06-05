@@ -3,6 +3,7 @@
 #include "../include/utils.hpp"
 #include "../include/setting.hpp"
 #include "../include/sorting.hpp"
+#include "../include/searching.hpp"
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -33,7 +34,7 @@ void showHint() {
     cout << setfill('-') << setw(90) << "" << endl;
 }
 
-void showData() {
+void showData(Barang arr[], int size) {
     cout << setfill('-') << setw(90) << "" << endl;
 
     cout << setfill(' ');
@@ -48,18 +49,35 @@ void showData() {
     cout << setfill('-') << setw(90) << "" << endl;
     cout << setfill(' ');
 
-    for (int i = 0; i < totalBarang; i++)
+    for (int i = 0; i < size; i++)
     {
+        if (arr[i].diKlaim) continue;
         cout << left
-            << setw(4) << dataBarang[i].idBarang
-            << setw(18) << dataBarang[i].namaBarang
-            << setw(18) << dataBarang[i].kategori
-            << setw(18) << dataBarang[i].lokasi
-            << setw(18) << dataBarang[i].tanggal
-            << setw(14) << dataBarang[i].waktu
+            << setw(4) << arr[i].idBarang
+            << setw(18) << arr[i].namaBarang
+            << setw(18) << arr[i].kategori
+            << setw(18) << arr[i].lokasi
+            << setw(18) << arr[i].tanggal
+            << setw(14) << arr[i].waktu
             << endl;
     }
     cout << setfill('-') << setw(90) << "" << endl;
+}
+
+void showSearch() {
+    char search[50];
+    Barang dataBarangSearch[100];
+    int totalBarangSearch = 0;
+
+    overwriteAbove(1);
+    cout << "Search: "; cin.getline(search, 50);
+    sequentialSearch(dataBarang, dataBarangSearch, totalBarang, totalBarangSearch, search);
+
+    CLEAR_SCREEN;
+    showData(dataBarangSearch, totalBarangSearch);
+
+    cout << "Tekan enter untuk melanjutkan...";
+    cin.get();
 }
 
 void showSort() {
@@ -78,32 +96,32 @@ void showSort() {
         << setw(30) << "(0) Kembali"
         << endl;
     cout << setfill('-') << setw(90) << "" << endl;
-    safeInput<int>("> ", sort);
+    safeInput("> ", sort);
 
     switch (sort)
     {
     case 1:
-        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.idBarang > b.idBarang;
         });
         break;
     case 2:
-        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.namaBarang[0] > b.namaBarang[0];
         });
         break;
     case 3:
-        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.kategori[0] > b.kategori[0];
         });
         break;
     case 4:
-        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.lokasi[0] > b.lokasi[0];
         });
         break;
     case 5:
-        selectSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
+        handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.tanggal[0] > b.tanggal[0];
         });
         break;
@@ -130,7 +148,8 @@ void showSaveSetting() {
     setting.loadedFile = fileName;
     saveSettingAsFile();
 
-    cout << "\nData berhasil di simpan..." << endl;
+    cout << "Data berhasil di simpan..." << endl;
+    cin.ignore();
     cin.get();
 }
 
@@ -146,7 +165,53 @@ void showLoadSetting() {
     setting.loadedFile = fileName;
     saveSettingAsFile();
 
+    cout << "Data berhasil di load..." << endl;
+
+    cin.ignore();
     cin.get();
+}
+
+void selectSortAlg() {
+    int sorting;
+
+    do
+    {
+        CLEAR_SCREEN;
+        cout << "Ubah algoritma sorting" << endl;
+        cout << setfill('-') << setw(90) << "" << endl;
+        cout << " 1. BUBBLE SORT           " << endl;
+        cout << " 2. SELECTION SORT        " << endl;
+        cout << " 3. INSERTION SORT        " << endl;
+        cout << " 4. SHELL SORT            " << endl;
+        cout << " 0. Batal                " << endl;
+
+        cout << setfill('-') << setw(90) << "" << endl;
+        safeInput("Pilih: ", sorting);
+
+        switch (sorting)
+        {
+        case 1:
+            setting.sortingAlgorithm = SortAlg::Bubble;
+            return;
+        case 2:
+            setting.sortingAlgorithm = SortAlg::Selection;
+            return;
+        case 3:
+            setting.sortingAlgorithm = SortAlg::Insertion;
+            return;
+        case 4:
+            setting.sortingAlgorithm = SortAlg::Shell;
+            return;
+        case 0:
+            return;
+        
+        default:
+            cout << "Pilihan tidak ada!" << endl;
+            cout << "Tekan enter untuk melanjutkan...";
+            cin.get();
+            break;
+        }
+    } while (sorting != 0);
 }
 
 void showSettings() {
@@ -155,15 +220,16 @@ void showSettings() {
     do
     {
         CLEAR_SCREEN;
-        cout << "Settings" << endl;
+        cout << "Pengaturan" << endl;
+        cout << " - File                : " << setting.loadedFile << endl
+             << " - Algoritma Sorting   : " << toString(setting.sortingAlgorithm) << endl;
         cout << setfill('-') << setw(90) << "" << endl;
         cout << "1. Save" << endl
              << "2. Load" << endl
              << "3. Ubah algoritma sorting" << endl
-             << "4. Ubah algoritma searching" << endl
              << "0. Back" << endl;
         cout << setfill('-') << setw(90) << "" << endl;
-        safeInput<int>("> ", menu);
+        safeInput("> ", menu);
     
         switch (menu)
         {
@@ -172,6 +238,10 @@ void showSettings() {
             break;
         case 2:
             showLoadSetting();
+            break;
+        case 3:
+            selectSortAlg();
+            saveSettingAsFile();
             break;
         case 0:
             break;

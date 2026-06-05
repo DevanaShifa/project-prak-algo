@@ -8,6 +8,8 @@ using namespace std;
 
 // debugging
 int main() {
+    MKDIR_DATA;
+    MKDIR_PRINT;
     loadSettingFromFile();
     loadBarangFromFile(setting.loadedFile);
 
@@ -18,10 +20,10 @@ int main() {
         CLEAR_SCREEN;
         showTitle();
 
-        showData();
+        showData(dataBarang, totalBarang);
         showHint();
 
-        safeInput<int>("> ", menu);
+        safeInput("> ", menu);
 
         switch (menu)
         {
@@ -33,6 +35,9 @@ int main() {
             break;
         case 3:
             showSort();
+            break;
+        case 4:
+            showSearch();
             break;
         case 5:
             showSettings();
