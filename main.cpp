@@ -5,14 +5,14 @@
 #include <string.h>
 
 // Untuk windows
-// #define MKDIR_DATA system("if not exist database mkdir database")
-// #define MKDIR_PRINT system("if not exist print mkdir print")
-// #define CLEAR_SCREEN system("cls")
+#define MKDIR_DATA system("if not exist database mkdir database")
+#define MKDIR_PRINT system("if not exist print mkdir print")
+#define CLEAR_SCREEN system("cls")
 
 // Untuk linux
-#define MKDIR_DATA system("mkdir -p database")
-#define MKDIR_PRINT system("mkdir -p print")
-#define CLEAR_SCREEN system("clear")
+// #define MKDIR_DATA system("mkdir -p database")
+// #define MKDIR_PRINT system("mkdir -p print")
+// #define CLEAR_SCREEN system("clear")
 
 using namespace std;
 
