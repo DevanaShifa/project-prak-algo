@@ -344,7 +344,7 @@ void saveKlaimAsFile(Klaim klaim) {
     }
 }
 
-void klaimBarang(int idx) {
+void klaimBarang(Barang* barang) {
     Klaim klaim;
     int hari, bulan, tahun, jam, menit;
 
@@ -380,14 +380,14 @@ void klaimBarang(int idx) {
     overwriteAbove(3);
     cout << "Waktu                : " << klaim.waktuKlaim << endl;
 
-    klaim.idBarang = dataBarang[idx].idBarang;
+    klaim.idBarang = barang->idBarang;
     
     saveKlaimAsFile(klaim);
     saveBarangAsFile(setting.loadedFile);
-    dataBarang[idx].diKlaim = true;
+    barang->diKlaim = true;
 
     cout << setfill('-') << setw(90) << "" << endl;
-    cout << "Laporan klaim barang di simpan ke 'print/data" << dataBarang[idx].idBarang << ".txt'" << endl;
+    cout << "Laporan klaim barang di simpan ke 'print/data" << barang->idBarang << ".txt'" << endl;
     cin.get();
 }
 
@@ -398,7 +398,7 @@ void pilihBarang() {
     overwriteAbove(1);
     rangedInput("Pilih Id Barang: ", idx, 1, totalBarang);
 
-    Barang *barangDipilih = nullptr;
+    Barang* barangDipilih = nullptr;
 
     for (int i = 0; i < totalBarang; i++)
     {
@@ -430,7 +430,7 @@ void pilihBarang() {
     safeInput("Pilih: ", menu);
 
     if (menu == 1) {
-        klaimBarang(idx-1);
+        klaimBarang(barangDipilih);
     }
 }
 
