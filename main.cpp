@@ -5,12 +5,12 @@
 #include <string.h>
 
 // Untuk windows
-#define MKDIR_DATA system("if not exist .lnfdata mkdir .lnfdata")
+#define MKDIR_DATA system("if not exist database mkdir database")
 #define MKDIR_PRINT system("if not exist print mkdir print")
 #define CLEAR_SCREEN system("cls")
 
 // Untuk linux
-// #define MKDIR_DATA system("mkdir -p .lnfdata")
+// #define MKDIR_DATA system("mkdir -p database")
 // #define MKDIR_PRINT system("mkdir -p print")
 // #define CLEAR_SCREEN system("clear")
 
@@ -209,7 +209,7 @@ void initSetting() {
 
 
 void saveSettingAsFile() {
-    ofstream File(".lnfdata/setting.txt");
+    ofstream File("database/setting.txt");
 
     if (File.is_open()) {
         File << "loaded-file: " << setting.loadedFile << endl;
@@ -222,7 +222,7 @@ void saveSettingAsFile() {
 }
 
 void loadSettingFromFile() {
-    ifstream File(".lnfdata/setting.txt");
+    ifstream File("database/setting.txt");
 
     if (File.is_open()) {
         string temp;
@@ -285,7 +285,7 @@ void sequentialSearch(Barang targetArr[], Barang searchArr[], int targetSize, in
 // HANDLE BARANG
 
 void saveBarangAsFile(const string& name) {
-    ofstream File(".lnfdata/"+name, ios::binary);
+    ofstream File("database/"+name, ios::binary);
 
     if (File.is_open()) {
         File.write(
@@ -303,7 +303,7 @@ void saveBarangAsFile(const string& name) {
 }
 
 void loadBarangFromFile(const string& name) {
-    ifstream File(".lnfdata/"+name);
+    ifstream File("database/"+name);
 
     if (File.is_open()) {
         File.read(
@@ -387,7 +387,12 @@ void klaimBarang(Barang* barang) {
     barang->diKlaim = true;
 
     cout << setfill('-') << setw(90) << "" << endl;
-    cout << "Laporan klaim barang di simpan ke 'print/data" << barang->idBarang << ".txt'" << endl;
+
+    string fileName = "print/data-" + 
+                      string(klaim.namaPengambil) +
+                      "-" +
+                      to_string(klaim.idBarang);
+    cout << "Laporan klaim barang di simpan ke '" << fileName << ".txt'" << endl;
     cin.get();
 }
 
