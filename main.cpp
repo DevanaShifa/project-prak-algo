@@ -321,8 +321,14 @@ void loadBarangFromFile(const string& name) {
 }
 
 void saveKlaimAsFile(Klaim klaim) {
-    string fileName = "print/data-"+string(klaim.namaPengambil)+"-"+to_string(klaim.idBarang);
-    ofstream File(fileName+".txt");
+    string fileName = "print/data-" + 
+                      string(klaim.namaPengambil) +
+                      "-" +
+                      to_string(klaim.idBarang);
+
+    cout << "DEBUG 2" << endl;
+
+    ofstream File(fileName + ".txt");
 
     if (File.is_open()) {
         File << "========================== Lost & Found ==========================" << endl;
@@ -374,6 +380,7 @@ void klaimBarang(int idx) {
     overwriteAbove(3);
     cout << "Waktu                : " << klaim.waktuKlaim << endl;
 
+    klaim.idBarang = dataBarang[idx].idBarang;
     
     saveKlaimAsFile(klaim);
     saveBarangAsFile(setting.loadedFile);
@@ -568,7 +575,6 @@ void showSort() {
     cout << left
         << setw(30) << "(1) ID"
         << setw(30) << "(3) Kategori"
-        << setw(30) << "(5) Tanggal"
         << endl
         << setw(30) << "(2) Nama Barang"
         << setw(30) << "(4) Lokasi"
@@ -597,11 +603,6 @@ void showSort() {
     case 4:
         handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
             return a.lokasi[0] > b.lokasi[0];
-        });
-        break;
-    case 5:
-        handleSortData(dataBarang, totalBarang, [](const Barang& a, const Barang& b) {
-            return a.tanggal[0] > b.tanggal[0];
         });
         break;
         
