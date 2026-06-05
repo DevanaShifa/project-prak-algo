@@ -4,9 +4,15 @@
 #include <fstream>
 #include <string.h>
 
-#define MKDIR_DATA system("mkdir -p .lnfdata")
-#define MKDIR_PRINT system("mkdir -p print")
-#define CLEAR_SCREEN system("clear")
+// Untuk windows
+#define MKDIR_DATA system("if not exist .lnfdata mkdir .lnfdata")
+#define MKDIR_PRINT system("if not exist print mkdir print")
+#define CLEAR_SCREEN system("cls")
+
+// Untuk linux
+// #define MKDIR_DATA system("mkdir -p .lnfdata")
+// #define MKDIR_PRINT system("mkdir -p print")
+// #define CLEAR_SCREEN system("clear")
 
 using namespace std;
 
@@ -281,8 +287,6 @@ void saveBarangAsFile(const string& name) {
         );
 
         File.close();
-    } else {
-        cout << "Gagal membuat file." << endl;
     }
 }
 
@@ -301,10 +305,6 @@ void loadBarangFromFile(const string& name) {
         );
         
         File.close();
-    } else {
-        cout << "File tidak ditemukan." << endl;
-        cout << "Tekan enter untuk melanjutkan...";
-        cin.get();
     }
 }
 
