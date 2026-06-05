@@ -50,6 +50,8 @@ int totalBarang = 0;
 Barang dataBarang[256];
 Setting setting;
 
+// ----------------------- UTILS -----------------------
+
 void overwriteAbove(int jump) {
     for (int i = 0; i < jump; i++) {
         cout << "\033[A";
@@ -131,7 +133,11 @@ void rangedInput(
         return;
     }
 }
+// ----------------------- UTILS -----------------------
 
+// ----------------------- SORTING -----------------------
+
+// deklarasi tipe data custom/alias untuk lambda function
 typedef bool (*LCompare)(const Barang&, const Barang&);
 
 void bubbleSort(Barang arr[], int size, LCompare cmp) {
@@ -192,6 +198,10 @@ void shellSort(Barang arr[], int size, LCompare cmp) {
     }    
 }
 
+// ----------------------- SORTING -----------------------
+
+
+// ----------------------- SETTING -----------------------
 void initSetting() {
     setting.loadedFile = "database";
     setting.sortingAlgorithm = SortAlg::Bubble;
@@ -251,7 +261,10 @@ void handleSortData(Barang arr[], int size, LCompare cmp) {
             break;
     }
 }
+// ----------------------- SETTING -----------------------
 
+
+// ----------------------- SEARCHING -----------------------
 void sequentialSearch(Barang targetArr[], Barang searchArr[], int targetSize, int& searchSize, char search[]) {
     for (int i = 0; i < targetSize; i++)
     {
@@ -267,6 +280,7 @@ void sequentialSearch(Barang targetArr[], Barang searchArr[], int targetSize, in
         }
     }
 }
+// ----------------------- SEARCHING -----------------------
 
 // HANDLE BARANG
 
