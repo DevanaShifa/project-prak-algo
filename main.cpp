@@ -42,7 +42,7 @@ enum SortAlg {
 };
 
 struct Setting {
-    std::string loadedFile;
+    string loadedFile;
     SortAlg sortingAlgorithm;
 };
 
@@ -52,11 +52,11 @@ Setting setting;
 
 void overwriteAbove(int jump) {
     for (int i = 0; i < jump; i++) {
-        std::cout << "\033[A";
-        std::cout << "\033[2K";
+        cout << "\033[A";
+        cout << "\033[2K";
     }
 
-    std::cout << "\r";
+    cout << "\r";
 }
 
 string toString(SortAlg alg) {
@@ -142,7 +142,7 @@ void bubbleSort(Barang arr[], int size, LCompare cmp) {
         for (int j = 0; j < size - i - 1; j++)
         {
             if (cmp(arr[j], arr[j+1])) {
-                std::swap(arr[j], arr[j+1]);
+                swap(arr[j], arr[j+1]);
             }
         }
     }
@@ -159,7 +159,7 @@ void selectionSort(Barang arr[], int size, LCompare cmp) {
         }
 
         if (selected != i) {
-            std::swap(arr[i], arr[selected]);
+            swap(arr[i], arr[selected]);
         }
     }
 }
@@ -476,7 +476,7 @@ void inputBarang() {
 // HANDLE DISPLAY
 
 void showTitle() {
-std::cout << 
+cout << 
 R"(
  _              _             _____                     _ 
 | |    ___  ___| |_   _ __   |  ___|__  _   _ _ __   __| |
