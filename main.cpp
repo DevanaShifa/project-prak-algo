@@ -5,14 +5,16 @@
 #include <string.h>
 
 // Untuk windows
-#define MKDIR_DATA system("if not exist database mkdir database")
-#define MKDIR_PRINT system("if not exist print mkdir print")
-#define CLEAR_SCREEN system("cls")
+// #define MKDIR_DATA system("if not exist database mkdir database")
+// #define MKDIR_PRINT system("if not exist print mkdir print")
+// #define CLEAR_SCREEN system("cls")
 
 // Untuk linux
-// #define MKDIR_DATA system("mkdir -p database")
-// #define MKDIR_PRINT system("mkdir -p print")
-// #define CLEAR_SCREEN system("clear")
+#define MKDIR_DATA system("mkdir -p database")
+#define MKDIR_PRINT system("mkdir -p print")
+#define CLEAR_SCREEN system("clear")
+
+//ambatukammmmm
 
 using namespace std;
 
@@ -183,19 +185,21 @@ void insertionSort(Barang arr[], int size, LCompare cmp) {
 }
 
 void shellSort(Barang arr[], int size, LCompare cmp) {
-    for (int gap = size/2; gap > 0; gap /= 2)
-    {
-        for (int i = gap; i < size; i++)
-        {
+    for (int gap = size / 2; gap > 0; gap /= 2) {
+        for (int i = gap; i < size; i++) {
             Barang temp = arr[i];
             int j;
 
-            for (j = i; j <= gap && cmp(arr[j - gap], temp); j -= gap)
+            for (j = i;
+                 j >= gap && cmp(arr[j - gap], temp);
+                 j -= gap)
             {
                 arr[j] = arr[j - gap];
-            }            
-        }        
-    }    
+            }
+
+            arr[j] = temp;
+        }
+    }
 }
 
 // ----------------------- SORTING -----------------------
@@ -320,13 +324,12 @@ void loadBarangFromFile(const string& name) {
     }
 }
 
-void saveKlaimAsFile(Klaim klaim) {
+void saveKlaimAsFile(Klaim klaim, int idx) {
     string fileName = "print/data-" + 
                       string(klaim.namaPengambil) +
                       "-" +
                       to_string(klaim.idBarang);
 
-    cout << "DEBUG 2" << endl;
 
     ofstream File(fileName + ".txt");
 
@@ -337,14 +340,14 @@ void saveKlaimAsFile(Klaim klaim) {
         File << "Waktu Klaim    : " << klaim.waktuKlaim << endl << endl;
 
         File << "Id Barang      : " << klaim.idBarang << endl;
-        File << "Nama Barang    : " << dataBarang[klaim.idBarang].namaBarang << endl;
-        File << "Deskripsi      : " << dataBarang[klaim.idBarang].deskripsi << endl;
+        File << "Nama Barang    : " << dataBarang[idx].namaBarang << endl;
+        File << "Deskripsi      : " << dataBarang[idx].deskripsi << endl;
         File << "========================== Lost & Found ==========================" << endl;
         File.close();
     }
 }
 
-void klaimBarang(Barang* barang) {
+void klaimBarang(Barang* barang, int idx) {
     Klaim klaim;
     int hari, bulan, tahun, jam, menit;
 
@@ -382,9 +385,10 @@ void klaimBarang(Barang* barang) {
 
     klaim.idBarang = barang->idBarang;
     
-    saveKlaimAsFile(klaim);
-    saveBarangAsFile(setting.loadedFile);
     barang->diKlaim = true;
+    
+    saveKlaimAsFile(klaim, idx);
+    saveBarangAsFile(setting.loadedFile);
 
     cout << setfill('-') << setw(90) << "" << endl;
 
@@ -399,21 +403,25 @@ void klaimBarang(Barang* barang) {
 void pilihBarang() {
     int menu;
 
+    int idBarang;
     int idx;
     overwriteAbove(1);
-    rangedInput("Pilih Id Barang: ", idx, 1, totalBarang);
+    rangedInput("Pilih Id Barang: ", idBarang, 0, totalBarang);
+
+    if (idBarang == 0) return;
 
     Barang* barangDipilih = nullptr;
 
     for (int i = 0; i < totalBarang; i++)
     {
-        if (dataBarang[i].idBarang != idx) continue;
+        if (dataBarang[i].idBarang != idBarang) continue;
         else if (dataBarang[i].diKlaim) {
             cout << "Barang sudah diklaim.";
             cin.get();
             return;
         } else {
             barangDipilih = &dataBarang[i];
+            idx = i;
         }
     }
     
@@ -435,7 +443,7 @@ void pilihBarang() {
     safeInput("Pilih: ", menu);
 
     if (menu == 1) {
-        klaimBarang(barangDipilih);
+        klaimBarang(barangDipilih, idx);
     }
 }
 
